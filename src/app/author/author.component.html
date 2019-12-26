@@ -1,0 +1,15 @@
+<h1>List of authors</h1>
+
+<p>{{ text | summary:10 }}</p>
+
+<ul>
+    <li *ngFor="let author of authors">
+        {{author}}
+    </li>
+</ul>
+
+<!--- <input [value]="email" (keyup.enter)="email = $event.target.value; onKeyUp()"/> -->
+<input [(ngModel)]="email" (keyup.enter)="onKeyUp()"/>
+<div (click)="onDivClicked()">
+    <button [style.backgroundColor]="isActive ? 'blue':'white'" class="btn btn-primary" [class.active]="isActive" (click)="onSave({event: $event})">Save</button>
+</div>
