@@ -6,11 +6,11 @@ import { NotFoundError } from '../common/not-found-error';
 import { BadInput } from '../common/bad-input';
 
 @Component({
-  selector: 'client',
-  templateUrl: './client.component.html',
-  styleUrls: ['./client.component.css']
+  selector: 'post',
+  templateUrl: './post.component.html',
+  styleUrls: ['./post.component.css']
 })
-export class ClientComponent implements OnInit{
+export class PostComponent implements OnInit{
 
   posts:any[];
   

@@ -20,7 +20,7 @@ import { CourseFormComponent } from './course-form/course-form.component';
 import { SignupFormComponent } from './signup-form/signup-form.component';
 import { NewCourseFormComponent } from './new-course-form/new-course-form.component';
 import { ChangePasswordComponent } from './change-password/change-password.component';
-import { ClientComponent } from './client/client.component';
+import { PostComponent } from './post/post.component';
 import { PostService } from './Services/post.service';
 import { AppErrorHandler } from './common/app-error-handler';
 
@@ -42,7 +42,7 @@ import { AppErrorHandler } from './common/app-error-handler';
     SignupFormComponent,
     NewCourseFormComponent,
     ChangePasswordComponent,
-    ClientComponent
+    PostComponent
   ],
   imports: [
     BrowserModule,
