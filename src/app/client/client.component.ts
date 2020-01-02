@@ -3,6 +3,7 @@ import { PostService } from '../Services/post.service';
 //import { runInThisContext } from 'vm';
 import { AppError } from '../common/app-error';
 import { NotFoundError } from '../common/not-found-error';
+import { BadInput } from '../common/bad-input';
 
 @Component({
   selector: 'client',
@@ -21,28 +22,24 @@ export class ClientComponent implements OnInit{
     this.service.getsPosts()
     .subscribe((response:any[])=>{
       this.posts=response;
-    },error =>{
-      alert('An unexpected error ocurred.');
-      console.log(error);
     });
   }
 
   createPost(input:HTMLInputElement){
     let post = { title: input.value };
+    interface responseObject {id: Number}
     input.value ='';
     this.service.createPost(post)
-    .subscribe(response =>{
-      post['id'] = response.id;
+    .subscribe((response:responseObject) =>{
+      post['id'] = response.id
       this.posts.splice(0,0,post);
       console.log(response);
     },(error: Response) =>{
-      if(error.status === 400){
+      if(error instanceof BadInput){
         //this.form.setErrors(error.json());
       }
-      else{ 
-        alert('An unexpected error ocurred.');
-        console.log(error);
-      }
+      else throw error;
+      
     });
   }
 
@@ -50,9 +47,6 @@ export class ClientComponent implements OnInit{
     this.service.updatePost(post)
     .subscribe(response=>{
       console.log(response);
-    },error =>{
-      alert('An unexpected error ocurred.');
-      console.log(error);
     });
   }
 
@@ -65,8 +59,7 @@ export class ClientComponent implements OnInit{
       },(error: AppError) =>{
         if(error instanceof NotFoundError)
           alert('This post has already been deleted.')
-        alert('An unexpected error ocurred.');
-        console.log(error);
+        else throw error;
       });
   }
 }
