@@ -19,7 +19,7 @@ export class PostComponent implements OnInit{
   }
 
   ngOnInit(){
-    this.service.getsPosts()
+    this.service.getAll()
     .subscribe((response:any[])=>{
       this.posts=response;
     });
@@ -29,7 +29,7 @@ export class PostComponent implements OnInit{
     let post = { title: input.value };
     interface responseObject {id: Number}
     input.value ='';
-    this.service.createPost(post)
+    this.service.create(post)
     .subscribe((response:responseObject) =>{
       post['id'] = response.id
       this.posts.splice(0,0,post);
@@ -44,14 +44,14 @@ export class PostComponent implements OnInit{
   }
 
   updatePost(post){
-    this.service.updatePost(post)
+    this.service.update(post)
     .subscribe(response=>{
       console.log(response);
     });
   }
 
   deletePost(post){
-    this.service.deletePost(post.id)
+    this.service.delete(post.id)
       .subscribe(response =>{
         let index = this.posts.indexOf(post);
         this.posts.splice(index,1);
